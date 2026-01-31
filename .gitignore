@@ -1,0 +1,14 @@
+# Visual Studio
+.vs/
+*.sln
+*.vcxproj*
+*.user
+*.log
+
+# Build folders
+Debug/
+Release/
+
+# OS files
+.DS_Store
+Thumbs.db
