@@ -3,11 +3,13 @@
 using namespace std; 
 int main()
 {
-	Vector<int> v1(3); 
-
-	v1.set(2, 5); 
-	v1.set(0, 1);
-	v1.set(1, 3); 
-
-	v1.print(); 
-}
+	int n = 3; 
+	Vector<int>v1(n); 
+	for (int i = 0; i < n; i++)
+	{
+		v1.set(i, i); 
+	}
+	v1.push_back(12.5);
+	
+	v1.print();
+ }
