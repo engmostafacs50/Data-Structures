@@ -21,7 +21,7 @@ public:
 	void left_rotation(); 
 	void right_rotation(); 
 	T erase(int index) ; 
-	//int length();
+	int find_transportation(T number);
 };
 
 template<typename T>
@@ -160,11 +160,26 @@ inline T Vector<T>::erase(int index)
 	return deletedNumber; 
 }
 
+template<typename T>
+inline int Vector<T>::find_transportation(T number)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (number == arr[i])
+		{
+			if (i == 0)
+			{
+				return 1;
+			}
+			else
+			{
+				swap(arr[i], arr[i - 1]); // Shifting one step to left
+				return 1; 
+			}
 
+		}
+	}
+	return -1; 
+}
 
-//template<typename T>
-//inline int Vector<T>::length()
-//{
-//	return size; 
-//}
 

@@ -9,6 +9,6 @@ int main()
 	{
 		v1.set(i, i); 
 	}
-	v1.erase(3); 
-	v1.print(); 
+	v1.find_transportation(3); // {0 , 1 , 2  , 3 , 4 }
+	v1.print(); // {0 , 1 , 3 , 2 , 4}
  }
