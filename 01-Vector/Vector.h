@@ -1,17 +1,18 @@
 #pragma once
 #include<cassert>
 #include<algorithm>
+#include<iostream>
 template<typename T>
 class Vector {
 private:
 	int size{0}; // user size 
-	int capacity{0}; // actual size 
+	int capacity{}; // actual size 
 	T* arr = nullptr;
 	void expand_capacity();
 public:
-	Vector(T size);
-	T at(const T index) const;
-	void set(const T index, const T number);
+	Vector(int size);
+	T at(const int index) const;
+	void set(const int index, const T number);
 	void print() const;
 	int find(T value);
 	void push_back(T number);
@@ -22,10 +23,12 @@ public:
 	void right_rotation(); 
 	T erase(int index) ; 
 	int find_transportation(T number);
+	T* data(); 
+	int get_size()const; 
 };
 
 template<typename T>
-inline Vector<T>::Vector(T size)
+inline Vector<T>::Vector(int size)
 {
 	assert(size > 0);
 	this->size = size; 
@@ -34,7 +37,7 @@ inline Vector<T>::Vector(T size)
 }
 
 template<typename T>
-inline T Vector<T>::at(const T index) const
+inline T Vector<T>::at(const int index) const
 {
 	assert(index >= 0 && index < size);
 	return arr[index];
@@ -43,7 +46,7 @@ inline T Vector<T>::at(const T index) const
 
 
 template<typename T>
-inline void Vector<T>::set(const T index, const T number)
+inline void Vector<T>::set(const int index, const T number)
 {
 	assert(index >= 0 && index < size);
 	arr[index] = number;
@@ -52,12 +55,13 @@ inline void Vector<T>::set(const T index, const T number)
 template<typename T>
 inline void Vector<T>::print() const
 {
-	for (int i = 0; i < size; i++)
+	for (size_t i = 0; i < size; i++)
 	{
-		cout << arr[i] << ' ';
+		std::cout << arr[i] << ' ';
 	}
-	std::cout << std::endl;
+	std::cout << '\n';
 }
+
 
 template<typename T>
 inline int Vector<T>::find(T value)
@@ -182,4 +186,14 @@ inline int Vector<T>::find_transportation(T number)
 	return -1; 
 }
 
+template<typename T>
+inline T* Vector<T>::data()
+{
+	return arr;
+}
 
+template<typename T>
+inline int Vector<T>::get_size() const
+{
+	return size;
+}

@@ -16,7 +16,7 @@ file(GLOB SOURCES
 )
 
 # Add executable
-add_executable(DataStructures ${SOURCES})
+add_executable(DataStructures ${SOURCES} "02-LinkedList/LinkedList.h" "Sorting Algorthims/Sorting.h")
 
 # Include current directory for headers
 target_include_directories(DataStructures PRIVATE ${CMAKE_SOURCE_DIR})
