@@ -16,7 +16,7 @@ int main()
 
 	cout << "Data before Sorting\n"; 
 	v1.print();
-	SelectionSort(v1.data(), v1.get_size());
+	BubbleSort(v1.data(), v1.get_size());
 	cout << "Data after Sorting\n"; 
 	v1.print();
 	
