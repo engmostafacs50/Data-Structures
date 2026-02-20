@@ -11,6 +11,7 @@ private:
 	void expand_capacity();
 public:
 	Vector(int size);
+	~Vector();
 	T at(const int index) const;
 	void set(const int index, const T number);
 	void print() const;
@@ -34,6 +35,12 @@ inline Vector<T>::Vector(int size)
 	this->size = size; 
 	capacity = size + 10; 
 	arr = new T[capacity];
+}
+
+template<typename T>
+inline Vector<T>::~Vector()
+{
+	delete[]arr; 
 }
 
 template<typename T>
