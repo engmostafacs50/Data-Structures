@@ -56,7 +56,7 @@ void BubbleSort(T* arr, int size)
 	}
 } 
 
-template<typename T>
+template<typename T> //o(n)
 void merge(T* arr, size_t left, size_t middle ,size_t right)
 {
 	int size_arr1 = middle - left + 1; 
@@ -95,9 +95,11 @@ void merge(T* arr, size_t left, size_t middle ,size_t right)
 		arr[k] = arr2[j];
 		k++; j++;
 	}
+	delete[]arr1;
+	delete[]arr2;
 }
 
-template<typename T>
+template<typename T> // O(nlogn)
 void merge_sort(T* arr, size_t l, size_t r)
 {
 	if (l < r)

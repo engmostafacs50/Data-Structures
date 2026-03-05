@@ -32,7 +32,9 @@ private:
         reverse_print_helper(node->next);
         cout << node->data << " ";
     }
-
+    Node* getHead() const{
+        return head; 
+    }
 public:
     SinglyLinkedList() :head(nullptr), tail(nullptr) ,length(0) {}
 
@@ -138,4 +140,39 @@ public:
 
         return temp->data;
     }
+
+    static SinglyLinkedList<T> mergeTwoSortedList(const SinglyLinkedList<T>&list1, const SinglyLinkedList<T>&list2)
+    {
+        SinglyLinkedList<T>mergedList; 
+        Node* p1 = list1.getHead();
+        Node* p2 = list2.getHead(); 
+        while (p1 != nullptr && p2 != nullptr)
+        {
+            if(p1->data < p2->data)
+            {
+                mergedList.insert_end(p1->data);
+                 p1 = p1->next; 
+            }
+            else
+            {
+                mergedList.insert_end(p2->data);
+                p2 = p2->next;
+            }
+        }
+       
+        
+        while (p1 != nullptr)
+        {
+            mergedList.insert_end(p1->data);
+            p1 = p1->next;
+        }
+        while (p2 != nullptr)
+        {
+            mergedList.insert_end(p2->data);
+            p2 = p2->next;
+        }
+       
+        return mergedList;
+    }
+    
 };
