@@ -2,6 +2,7 @@
 #include<cassert>
 #include<algorithm>
 #include<iostream>
+#include"Sorting Algorthims/Sorting.h"
 template<typename T>
 class Vector {
 private:
@@ -26,6 +27,10 @@ public:
 	int find_transportation(T number);
 	T* data(); 
 	int get_size()const; 
+	int recursiveSeqSearch(T target,int index);
+	int binarySearch(T target , int left ,int right); 
+	int begin() const; 
+	int end()const;
 };
 
 template<typename T>
@@ -203,4 +208,58 @@ template<typename T>
 inline int Vector<T>::get_size() const
 {
 	return size;
+}
+
+template<typename T>
+inline int Vector<T>::recursiveSeqSearch(T target,int index)
+{ 
+	//index = 0; 
+	if (index == this->get_size()) // base case
+	{
+		return -1; 
+	}
+	if (arr[index] == target)
+	{
+			return index; 
+	}
+	recursiveSeqSearch(target, index+1); 
+}
+
+template<typename T>
+inline int Vector<T>::binarySearch(T target, int left, int right)
+{
+	merge_sort(arr, left, right); // time complexity = O(nlogn)
+
+	// implements binarySearch 
+	// time complexity = O(logn)
+	
+	while (left <= right)
+	{
+		int mid = left + (right - left) / 2;
+		if (arr[mid] == target)
+		{
+			return mid; 
+		}
+		else if (arr[mid] > target)
+		{
+			right = mid - 1;
+		}
+		else if(arr[mid] < target)
+		{
+			left = mid + 1;
+		}
+	}
+	return -1; 
+}
+
+template<typename T>
+inline int Vector<T>::begin() const
+{
+	return 0;
+}
+
+template<typename T>
+inline int Vector<T>::end() const
+{
+	return size - 1;
 }

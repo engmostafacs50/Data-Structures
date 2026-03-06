@@ -158,9 +158,7 @@ public:
                 mergedList.insert_end(p2->data);
                 p2 = p2->next;
             }
-        }
-       
-        
+        }        
         while (p1 != nullptr)
         {
             mergedList.insert_end(p1->data);
@@ -174,5 +172,8 @@ public:
        
         return mergedList;
     }
-    
+    void deleteFirstNode()
+    {
+        head = head->next; 
+    }
 };

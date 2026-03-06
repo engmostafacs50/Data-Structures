@@ -6,15 +6,22 @@
 using namespace std; 
 int main()
 {
-	SinglyLinkedList<int>List1;
-	List1.insert_end(2);
-	List1.insert_end(3);
-	List1.insert_end(9);
-	SinglyLinkedList<int>List2;
-	List2.insert_end(1);
-	List2.insert_end(6);
-	List2.insert_end(7);
-
-	SinglyLinkedList<int>list3 = SinglyLinkedList<int>::mergeTwoSortedList(List1, List2);
-	list3.print();
+	//SinglyLinkedList<int>List1;
+	//List1.insert_end(2);
+	//List1.insert_end(3);
+	//List1.insert_end(9);
+	//List1.print(); 
+	//cout << endl; 
+	//List1.deleteFirstNode(); 
+	//List1.print();
+	Vector<int>vec(4);
+	for (int i = 0; i < 4; i++)
+	{
+		cout << "Entern num \n"; 
+		int num; cin >> num; 
+		vec.set(i, num); 
+	}
+	cout << "enter num wich you want search it "; 
+	int num; cin >> num; 
+	cout << vec.binarySearch(num, vec.begin(), vec.end());
 }
