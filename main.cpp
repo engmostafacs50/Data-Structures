@@ -14,14 +14,16 @@ int main()
 	//cout << endl; 
 	//List1.deleteFirstNode(); 
 	//List1.print();
-	Vector<int>vec(4);
-	for (int i = 0; i < 4; i++)
+	Vector<int>vec(7);
+	for (int i = 0; i < vec.get_size(); i++)
 	{
 		cout << "Entern num \n"; 
 		int num; cin >> num; 
 		vec.set(i, num); 
 	}
-	cout << "enter num wich you want search it "; 
-	int num; cin >> num; 
-	cout << vec.binarySearch(num, vec.begin(), vec.end());
+	cout << "array before sorted\n";
+	vec.print();
+	cout << "array after sorted\n";
+	quickSort(vec.data(), vec.begin(), vec.end()); 
+	vec.print();
 }

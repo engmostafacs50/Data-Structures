@@ -1,112 +1,143 @@
 #pragma once
 #include<algorithm>
-/*
-Time complexity is O(n^2)
-What's best case ?
-	if temp >= arr[j-1] in this case time complexity is O(n)
-*/
-template <typename T>
-void InsertionSort(T* arr, int size)
-{
-	for (size_t i = 1, j; i < size; i++)
-	{
-		T temp = arr[i];
-		for (j = i; j > 0 && temp < arr[j - 1]; j--)
-		{
-			arr[j] = arr[j - 1];
-		}
-		arr[j] = temp;
 
+template<typename T>
+void insertionSort(T* arr, int size)
+{
+	for (size_t i = 1 , j ; i < size;i++)
+	{
+		T temp = arr[i]; 
+		for (j =i ; j > 0 && arr[j-1] >temp ; j--)
+		{
+			arr[j] = arr[j - 1]; 
+		}
+		arr[j] = temp ; 
 	}
 }
 
-template <typename T>
-void SelectionSort(T* arr, int size)
+template<typename T>
+void selectionSort(T* arr, int size)
 {
-	int minIndex = 0; 
-	for (size_t i = 0 , j; i < size - 1; i++)
+	int minIndex = 0;
+	for (size_t i = 0, j; i < size - 1; i++)
 	{
-		for (j = i + 1; j < size; j++)
+		for (j = i + 1; j < size ; j++)
 		{
 			if (arr[j] < arr[minIndex])
 			{
-				minIndex = j; 
+				minIndex = j;
 			}
 		}
 		swap(arr[i], arr[minIndex]); 
 	}
 }
 
-template <typename T>
-void BubbleSort(T* arr, int size)
+template<typename T>
+void bubbleSort(T* arr, int size)
 {
-	bool isOrdered = false; 
-	for (size_t i = 0; i < size; i++) {
-		for (size_t j = 0; j < size-i-1; j++) {
-			if (arr[j] > arr[j + 1])
+	bool isOrdered = false;
+	for (size_t i = 0; i < size; i++)
+	{
+		for (size_t j = 0; j < size - i - 1;j++) 
+		{
+			if(arr[j] > arr[j+1])
 			{
-				swap(arr[j], arr[j + 1]); 
-				isOrdered = true; 
+				swap(arr[j], arr[j + 1]);
+				isOrdered = true;
 			}
 		}
 		if (!isOrdered)
-		{
-			break; 
-		}
+			break;
 	}
-} 
-
-template<typename T> //o(n)
-void merge(T* arr, size_t left, size_t middle ,size_t right)
+}
+template<typename T>
+void merge(T* arr, int left, int mid, int right)
 {
-	int size_arr1 = middle - left + 1; 
-	int size_arr2 = right - middle ; 
+	int sizeArr1 = mid - left + 1;
+	int sizeArr2 = right - mid;
 
-	T* arr1 = new T[size_arr1]; 
-	T* arr2 = new T[size_arr2]; 
-	for (int i = 0; i < size_arr1; i++)
-		arr1[i] = arr[left+i]; 
-	for (int j = 0; j < size_arr2; j++)
-		arr2[j] = arr[middle+1+j];
-	size_t i, j;
-	i = j = 0;
-	size_t k = left; 
-	while (i < size_arr1 && j < size_arr2)
+	T* arr1 = new T[sizeArr1];
+	T* arr2 = new T[sizeArr2];
+
+	for (size_t i = 0; i < sizeArr1; i++)
+	{
+		arr1[i] = arr[i + left];
+	}
+	for (size_t i = 0; i < sizeArr2; i++)
+	{
+		arr2[i] = arr[i + mid + 1];
+	}
+	int i = 0, j = 0;
+	int k = left;
+	while (i < sizeArr1 && j < sizeArr2)
 	{
 		if (arr1[i] <= arr2[j])
 		{
-			arr[k] = arr1[i]; 
-			k++; i++;
+			arr[k] = arr1[i];
+			i++;
 		}
 		else
 		{
 			arr[k] = arr2[j];
-			k++; j++;
+			j++;
 		}
+		k++;
 	}
-
-	while (i < size_arr1)
+	while (i < sizeArr1)
 	{
-		arr[k] = arr1[i]; 
-		k++; i++;
+		arr[k] = arr1[i];
+		i++;k++;
 	}
-	while (j < size_arr2)
+	while (j < sizeArr2)
 	{
 		arr[k] = arr2[j];
-		k++; j++;
+		j++;k++;
 	}
-	delete[]arr1;
-	delete[]arr2;
+}
+template<typename T>
+void mergeSort(T*arr , int left, int right)
+{
+	if (left < right)
+	{
+		int mid = left + (right - left) / 2; 
+		mergeSort(arr , left, mid); 
+		mergeSort(arr ,mid+1, right);
+		merge(arr , left, mid, right); 
+	}
+}
+template<typename T>
+int partition(T*arr ,int left ,int right)
+{
+	T pivot = arr[left]; 
+	int l = left + 1; 
+	int h = right; 
+	while (true)
+	{
+		while (l <= h && pivot >= arr[l])
+		{
+			l++;
+		}
+		while (l <= h && pivot < arr[h])
+		{
+			h--; 
+		}
+		if (l > h)
+		{
+			break; 
+		}
+		swap(arr[l], arr[h]); 
+	}
+	swap(arr[left], arr[h]);
+	return h; 
 }
 
-template<typename T> // O(nlogn)
-void merge_sort(T* arr, size_t l, size_t r)
+template<typename T>
+void quickSort(T*arr ,int low , int high) 
 {
-	if (l < r)
+	if (low < high)
 	{
-		int mid = l + (r - l) / 2; 
-		merge_sort(arr, l, mid); 
-		merge_sort(arr,mid+1, r);
-		merge(arr, l, mid , r); 
+		int right = partition(arr, low, high);
+		quickSort(arr , low, right-1);
+		quickSort(arr , right + 1, high);
 	}
 }

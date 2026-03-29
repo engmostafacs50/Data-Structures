@@ -10,6 +10,11 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug)
 endif()
 
+# Install path
+if(NOT DEFINED CMAKE_INSTALL_PREFIX OR CMAKE_INSTALL_PREFIX STREQUAL "")
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/out/install/${CMAKE_BUILD_TYPE}" CACHE PATH "Install path")
+endif()
+
 # Add source files
 file(GLOB SOURCES
     "${CMAKE_SOURCE_DIR}/*.cpp"
