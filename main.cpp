@@ -14,16 +14,39 @@ int main()
 	//cout << endl; 
 	//List1.deleteFirstNode(); 
 	//List1.print();
-	Vector<int>vec(7);
-	for (int i = 0; i < vec.get_size(); i++)
+	//Vector<int>vec(7);
+	//for (int i = 0; i < vec.get_size(); i++)
+	//{
+	//	cout << "Entern num \n"; 
+	//	int num; cin >> num; 
+	//	vec.set(i, num); 
+	//}
+	//cout << "array before sorted\n";
+	//vec.print();
+	//cout << "array after sorted\n";
+	//quickSort(vec.data(), vec.begin(), vec.end()); 
+	//vec.print();
+
+	LinkedList<int>list; 
+	for (int i = 0; i < 6; i++)
 	{
-		cout << "Entern num \n"; 
+		cout << "Enter num "; 
 		int num; cin >> num; 
-		vec.set(i, num); 
+		list.insert_end(num); 
 	}
-	cout << "array before sorted\n";
-	vec.print();
-	cout << "array after sorted\n";
-	quickSort(vec.data(), vec.begin(), vec.end()); 
-	vec.print();
+	list.print(); 
+
+	cout << "Size is " << list.get_lenght() << endl; 
+
+	//cout << "Enter number which you search obout that "; 
+	//int num; cin >> num; 
+	//if (list.isFind(num))
+	//	cout << "y";
+	//else
+	//	cout << "n"; 
+
+	cout << "Enter item which you need insert before it then number "; int num , item ; cin >> item >> num ;
+	cout << endl; 
+	list.insert_beforeItem(item, num); 
+	list.print();
 }

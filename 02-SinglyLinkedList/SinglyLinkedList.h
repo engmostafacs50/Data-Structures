@@ -3,177 +3,161 @@
 #include<exception>
 #include<cassert>
 using namespace std;
-template<typename T>
-class SinglyLinkedList
+
+template <typename T>
+class Node
 {
-private:
-    int length;
-    struct Node
-    {
-        T data;
-        Node* next;
-        Node(T d) : data(d), next(nullptr)  {}
-    };
-
-    Node* head;
-    Node* tail;
-    void print_helper(Node* node)
-    {
-        if (node == nullptr)
-            return; 
-        cout << node->data << " "; 
-        print_helper(node->next);
-    }
-    void reverse_print_helper(Node* node)
-    {
-        if (node == nullptr)
-            return;
-
-        reverse_print_helper(node->next);
-        cout << node->data << " ";
-    }
-    Node* getHead() const{
-        return head; 
-    }
-public:
-    SinglyLinkedList() :head(nullptr), tail(nullptr) ,length(0) {}
-
-    void insert_front(T number)
-    {
-        length++; 
-        Node* node = new Node(number);       
-        if (head == nullptr) {
-            head = tail = node;
-        }
-        else {
-            node->next = head;
-            head = node;
-        }
-    }
-    void insert_end(T number)
-    {
-        length++;
-        Node* node = new Node(number); 
-        if (head == nullptr)
-        {
-            tail = head = node; 
-        }
-        else
-        {
-            tail->next = node; 
-            tail = node; 
-        }
-    }
-    void checking_data_integrity()
-    {
-        if (length == 0)
-        {
-            assert(head == nullptr);
-            assert(tail == nullptr);
-        }
-        else
-        {
-            if (length == 1)
-            {
-                assert(head == tail);
-            }
-            else
-            {
-                assert(head != tail);
-            }
-            assert(!tail->next); 
-        }
-    }
-    //void print1()
-    //{
-    //    Node* temp = head;
-
-    //    while (temp != nullptr)
-    //    {
-    //        cout << temp->data << " ";
-    //        temp = temp->next;
-    //    }
-    //}
-    //void print2()
-    //{
-    //    for (Node* temp = head; temp != nullptr; temp = temp->next)
-    //    {
-    //        cout << temp->data << " ";
-    //    }
-    //    cout << endl;
-    //}
-    void print()
-    {
-        print_helper(head);
-    }
-    void reverse_print()
-    {
-        reverse_print_helper(head);
-    }
-    bool find(T number)
-    {
-        Node* temp = head;
-        while (temp != nullptr)
-        {
-            if (temp->data == number)
-            {
-                return true; 
-            }
-            temp = temp->next;
-        }
-        return false; 
-    }
-    T get_nt(int n)
-    {
-        Node* temp = head;
-
-        for (int i = 1; i < n; i++)
-        {
-            if (temp == nullptr)
-                throw out_of_range("Index out of range");
-
-            temp = temp->next;
-        }
-
-        if (temp == nullptr)
-            throw out_of_range("Index out of range");
-
-        return temp->data;
-    }
-
-    static SinglyLinkedList<T> mergeTwoSortedList(const SinglyLinkedList<T>&list1, const SinglyLinkedList<T>&list2)
-    {
-        SinglyLinkedList<T>mergedList; 
-        Node* p1 = list1.getHead();
-        Node* p2 = list2.getHead(); 
-        while (p1 != nullptr && p2 != nullptr)
-        {
-            if(p1->data < p2->data)
-            {
-                mergedList.insert_end(p1->data);
-                 p1 = p1->next; 
-            }
-            else
-            {
-                mergedList.insert_end(p2->data);
-                p2 = p2->next;
-            }
-        }        
-        while (p1 != nullptr)
-        {
-            mergedList.insert_end(p1->data);
-            p1 = p1->next;
-        }
-        while (p2 != nullptr)
-        {
-            mergedList.insert_end(p2->data);
-            p2 = p2->next;
-        }
-       
-        return mergedList;
-    }
-    void deleteFirstNode()
-    {
-        head = head->next; 
-    }
+public :
+	T data; 
+	Node* next;
+	Node(T number) : data(number) , next(nullptr) {}
 };
+template <typename T>
+class LinkedList 
+{
+private :
+	Node<T>* head; 
+	Node<T>* tail;
+	unsigned int length{0};
+	void print_helper(Node<T>* node)const;
+	void reverse_print_helper(Node<T>* node)const;
+public :
+	LinkedList(); 
+	//~LinkedList();
+	bool isEmpty();
+	bool isFind(T number);
+	void insert_front(T number);
+	void insert_end(T number);
+	void insert_beforeItem(T item, T number); 
+	void print() const ; 
+	void reverse_print() const ; 
+	unsigned int get_lenght()const; 
+};
+
+template<typename T>
+inline void LinkedList<T>::print_helper(Node<T>* node) const
+{
+	if (node == nullptr)
+		return; 
+	cout << node->data << " ";
+	print_helper(node->next);
+}
+
+template<typename T>
+inline void LinkedList<T>::reverse_print_helper(Node<T>* node) const
+{
+	if (node == nullptr)
+		return;
+	reverse_print_helper(node->next);
+	cout << node->data << " ";
+}
+
+template<typename T>
+inline LinkedList<T>::LinkedList()
+{
+	head = nullptr; 
+	tail = nullptr; 
+}
+
+template<typename T>
+inline bool LinkedList<T>::isEmpty()
+{
+	return (head == nullptr);
+}
+
+template<typename T>
+inline bool LinkedList<T>::isFind(T number)
+{
+	Node<T>* temp = head; 
+	while (temp != nullptr)
+	{
+		if (temp->data == number)
+		{
+			return true; 
+		}
+		temp = temp->next;
+	}
+	return false; 
+}
+
+template<typename T>
+inline void LinkedList<T>::insert_front(T number)
+{
+	length++; 
+	Node<T>* newNode = new Node<T>(number);
+	if(isEmpty())
+	{
+		tail = head = newNode; 
+	}
+	else
+	{
+		newNode->next = head; 
+		head = newNode; 
+	}
+}
+
+template<typename T>
+inline void LinkedList<T>::insert_end(T number)
+{
+	length++;
+	Node<T>* newNode = new Node<T>(number);
+	if (isEmpty())
+	{
+		tail = head = newNode;
+	}
+	else
+	{
+		tail->next = newNode; // last node point to new node ; 
+		tail = newNode; 
+	}
+}
+
+template<typename T>
+inline void LinkedList<T>::insert_beforeItem(T item, T number)
+{
+	assert(isFind(item));
+	length++;
+	Node<T>* newNode = new Node<T>(number);
+	if (item == head->data)
+	{
+		this->insert_front(number); 
+	}
+	else
+	{
+		for (Node<T>* temp = head; temp != nullptr; temp = temp->next)
+		{
+			if (temp->next->data == item && temp->next != nullptr)
+			{
+				newNode->next = temp->next;
+				temp->next = newNode; 
+				return; 
+			}
+		}
+	}
+}
+
+template<typename T>
+inline void LinkedList<T>::print() const
+{	
+	print_helper(head); 
+	cout << endl; 
+	//for (Node<T>* temp = head; temp != nullptr; temp = temp->next)
+	//{
+	//	cout << temp->data << " "; 
+	//}
+	//cout << endl; 
+}
+
+template<typename T>
+inline void LinkedList<T>::reverse_print() const
+{
+	reverse_print_helper(head);
+	cout << endl; 
+}
+
+template<typename T>
+inline unsigned int LinkedList<T>::get_lenght() const
+{
+	return length;
+}
+
