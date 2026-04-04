@@ -2,16 +2,8 @@
 #include <iostream>
 #include<exception>
 #include<cassert>
+#include"../common/Node.h"
 using namespace std;
-
-template <typename T>
-class Node
-{
-public :
-	T data; 
-	Node* next;
-	Node(T number) : data(number) , next(nullptr) {}
-};
 template <typename T>
 class LinkedList 
 {
@@ -21,6 +13,7 @@ private :
 	unsigned int length{0};
 	void print_helper(Node<T>* node)const;
 	void reverse_print_helper(Node<T>* node)const;
+
 public :
 	LinkedList(); 
 	//~LinkedList();
@@ -29,9 +22,12 @@ public :
 	void insert_front(T number);
 	void insert_end(T number);
 	void insert_beforeItem(T item, T number); 
+	void insert_afterItem(T item, T number);
 	void print() const ; 
 	void reverse_print() const ; 
 	unsigned int get_lenght()const; 
+	void delete_element(T number);
+
 };
 
 template<typename T>
@@ -137,6 +133,30 @@ inline void LinkedList<T>::insert_beforeItem(T item, T number)
 }
 
 template<typename T>
+inline void LinkedList<T>::insert_afterItem(T item, T number)
+{
+	assert(isFind(item)); 
+	length++;
+	if (item == tail->data)
+	{
+		this->insert_end(number); 
+	}
+	else
+	{
+		Node<T>* newNode = new Node<T>(number); 
+		for (Node<T>* temp = head; temp != nullptr; temp = temp->next)
+		{
+			if(temp->next != nullptr && temp->next->data == item)
+			{
+				newNode->next = temp->next->next;
+				temp->next->next = newNode;
+				return;
+			}
+		}
+	}
+}
+
+template<typename T>
 inline void LinkedList<T>::print() const
 {	
 	print_helper(head); 
@@ -161,3 +181,29 @@ inline unsigned int LinkedList<T>::get_lenght() const
 	return length;
 }
 
+template<typename T>
+inline void LinkedList<T>::delete_element(T number)
+{
+	assert(isFind(number));
+	length--; 
+	Node<T>* delPtr; 
+	if (number == head->data)
+	{
+		delPtr = head; 
+		head = head->next; 
+		delete delPtr;
+	}
+	else
+	{
+		for (Node<T>* temp = head; temp != nullptr; temp = temp->next)
+		{
+			if (number == temp->next->data && temp->next != nullptr)
+			{
+				delPtr = temp->next;
+				temp->next = delPtr->next; 
+				delete delPtr;
+				return; 
+			}
+		}
+	}
+}

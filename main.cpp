@@ -1,8 +1,10 @@
 #include<iostream>
 #include<algorithm>
 #include "01-Vector/Vector.h"
+#include "03-stack/stack.h"
 #include"Sorting Algorthims/Sorting.h"
 #include"02-SinglyLinkedList/SinglyLinkedList.h"
+#include"DoublyLinkedList/DoublyLinkedList.h"
 using namespace std; 
 int main()
 {
@@ -24,29 +26,45 @@ int main()
 	//cout << "array before sorted\n";
 	//vec.print();
 	//cout << "array after sorted\n";
-	//quickSort(vec.data(), vec.begin(), vec.end()); 
+	//mergeSort(vec.data(), vec.begin(), vec.end()); 
 	//vec.print();
 
-	LinkedList<int>list; 
-	for (int i = 0; i < 6; i++)
-	{
-		cout << "Enter num "; 
-		int num; cin >> num; 
-		list.insert_end(num); 
-	}
-	list.print(); 
+	//LinkedList<int>list; 
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	cout << "Enter num "; 
+	//	int num; cin >> num; 
+	//	list.insert_end(num); 
+	//}
+	//list.print(); 
 
-	cout << "Size is " << list.get_lenght() << endl; 
+	//cout << "Size is " << list.get_lenght() << endl; 
 
-	//cout << "Enter number which you search obout that "; 
+	////cout << "Enter number which you search obout that "; 
+	////int num; cin >> num; 
+	////if (list.isFind(num))
+	////	cout << "y";
+	////else
+	////	cout << "n"; 
+
+	//cout << "Enter item which you need insert after it then number "; int num , item ; cin >> item >> num ;
+	//cout << endl; 
+	//list.insert_afterItem(item, num); 
+	//list.print();
 	//int num; cin >> num; 
-	//if (list.isFind(num))
-	//	cout << "y";
-	//else
-	//	cout << "n"; 
+	//list.delete_element(num); 
+	//list.print();
+	//cout << "Size is " << list.get_lenght() << endl;
 
-	cout << "Enter item which you need insert before it then number "; int num , item ; cin >> item >> num ;
-	cout << endl; 
-	list.insert_beforeItem(item, num); 
-	list.print();
+	DoublyLinkedList<int>doubleList;
+	doubleList.insert_front(5);
+	doubleList.insert_front(4);
+	doubleList.insert_front(3);
+	doubleList.insert_front(2);
+	doubleList.insert_front(1);
+	doubleList.print(); 
+	doubleList.del_element(2); 
+	doubleList.del_element(5);
+	doubleList.del_element(1);
+	doubleList.print();
 }
