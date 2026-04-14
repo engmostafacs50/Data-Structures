@@ -55,16 +55,24 @@ int main()
 	//list.delete_element(num); 
 	//list.print();
 	//cout << "Size is " << list.get_lenght() << endl;
+	Vector<int>vec(6); 
+	vec.set(0 ,4);
+	vec.set(1 , 2);
+	vec.set(2 , 5);
+	vec.set(3, 1);
+	vec.set(4 ,3);
+	vec.set(5 , 0);
 
-	DoublyLinkedList<int>doubleList;
-	doubleList.insert_front(5);
-	doubleList.insert_front(4);
-	doubleList.insert_front(3);
-	doubleList.insert_front(2);
-	doubleList.insert_front(1);
-	doubleList.print(); 
-	doubleList.del_element(2); 
-	doubleList.del_element(5);
-	doubleList.del_element(1);
-	doubleList.print();
+	bubbleSort(vec.data(),6); 
+	//DoublyLinkedList<int>doubleList;
+	//doubleList.insert_front(5);
+	//doubleList.insert_front(4);
+	//doubleList.insert_front(3);
+	//doubleList.insert_front(2);
+	//doubleList.insert_front(1);
+	//doubleList.print(); 
+	//doubleList.del_element(2); 
+	//doubleList.del_element(5);
+	//doubleList.del_element(1);
+	//doubleList.print();
 }

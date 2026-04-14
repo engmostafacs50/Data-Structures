@@ -4,14 +4,20 @@
 template<typename T>
 void insertionSort(T* arr, int size)
 {
-	for (size_t i = 1 , j ; i < size;i++)
+	for (size_t i = 1 ; i < size;i++)
 	{
-		T temp = arr[i]; 
+		T temp = arr[i];
+		size_t j; 
 		for (j =i ; j > 0 && arr[j-1] >temp ; j--)
 		{
 			arr[j] = arr[j - 1]; 
 		}
-		arr[j] = temp ; 
+		arr[j] = temp ;
+		for (int k = 0; k < size; k++)
+		{
+			cout << arr[k] << " ";
+		}
+		cout << endl; 
 	}
 }
 
@@ -29,15 +35,22 @@ void selectionSort(T* arr, int size)
 			}
 		}
 		swap(arr[i], arr[minIndex]); 
+		for (int k = 0; k < size; k++)
+		{
+			cout << arr[k] << " ";
+		}
+		cout << endl;
+		cout << "minIndex = " << minIndex << endl ;
 	}
 }
 
 template<typename T>
 void bubbleSort(T* arr, int size)
 {
-	bool isOrdered = false;
+	
 	for (size_t i = 0; i < size; i++)
 	{
+		bool isOrdered = false;
 		for (size_t j = 0; j < size - i - 1;j++) 
 		{
 			if(arr[j] > arr[j+1])
@@ -45,9 +58,15 @@ void bubbleSort(T* arr, int size)
 				swap(arr[j], arr[j + 1]);
 				isOrdered = true;
 			}
+			for (int k = 0; k < size; k++)
+			{
+				cout << arr[k] << " ";
+			}
+			cout << endl;
 		}
 		if (!isOrdered)
 			break;
+		
 	}
 }
 template<typename T>

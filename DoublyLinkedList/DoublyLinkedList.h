@@ -93,6 +93,7 @@ inline void DoublyLinkedList<T>::del_element(T number)
 {
 	assert(!isEmpty());
 	assert(isFound(number)); 
+	length--; 
 	DoublyNode<T>* del_ptr; 
 	if (number == head->data)
 	{
