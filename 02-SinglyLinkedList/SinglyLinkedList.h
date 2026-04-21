@@ -212,7 +212,6 @@ inline void LinkedList<T>::delete_element(T number)
 template<typename T>
 inline void LinkedList<T>::delete_even_elements()
 {
-
 	Node<T>* current = head; 
 	Node<T>* del_ptr;
 	if (current->data % 2 == 0)

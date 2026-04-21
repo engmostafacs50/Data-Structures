@@ -8,8 +8,6 @@ public :
 	DoublyNode<T>* next{nullptr};
 	DoublyNode<T>* previous{nullptr};
 	DoublyNode(T number) : data(number){}
-
-
 };
 template<typename T>
 class DoublyLinkedList

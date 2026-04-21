@@ -7,65 +7,8 @@
 #include"Sorting Algorthims/Sorting.h"
 #include"02-SinglyLinkedList/SinglyLinkedList.h"
 #include"DoublyLinkedList/DoublyLinkedList.h"
-//#include"./Tree/BinaryTree.h"
-
+#include"./Tree/BinaryTree.h"
 using namespace std;
-struct node {
-	int data;
-	node* left;
-	node* right;
-
-	node(int val) {
-		data = val;
-		left = right = NULL;
-	}
-};
-int height(node* r)
-{
-	if (r == nullptr)
-		return -1; 
-	int leftHeight = height(r->left);
-	int rightHeight = height(r->right);
-	return 1 + max(leftHeight, rightHeight); 
-}
-void print(node* r)
-{
-	if (r == NULL)
-		return;
-	print(r->left);
-	cout << r->data << " "; 
-	print(r->right);
-}
-int leafs = 0; 
-int leafNumbers(node* r)
-{
-	if (r == nullptr)
-		return 0; 
-	if (r->left == nullptr && r->right == nullptr)
-		leafs++; 
-	leafNumbers(r->left);
-	leafNumbers(r->right);
-
-	return leafs; 
-}
-int minNum = INT8_MAX; 
-int minVal(node* r)
-{
-	if (r == nullptr)
-		return minNum; 
-	if (minNum > r->data)
-		minNum = r->data; 
-	minVal(r->left);
-	minVal(r->right);
-}
-void clear(node* r)
-{
-	if (r == nullptr)
-		return; 
-	clear(r->left);
-	clear(r->right);
-	delete r; 
-}
 int precedence(char operand)
 {
 	if (operand == '+' || operand == '-')
@@ -111,19 +54,43 @@ string convertingToPostfix(string InfixEq)
 
 int main()
 {
+	BinaryTree<int> tree(1); // root(r) = 1 
+	tree.addNode({ 2 }, { 'L' }); 
+	tree.addNode({ 3 }, { 'R' }); 
+	tree.addNode({ 2, 4 }, { 'L', 'L' }); 
+	tree.addNode({ 2, 5 }, { 'L', 'R' });
+	tree.addNode({ 3, 6 }, { 'R', 'R' });
+	tree.addNode({ 2, 4, 7 }, { 'L', 'L', 'L' });
+	tree.addNode({ 2, 4, 8 }, { 'L', 'L', 'R' });
+	tree.addNode({ 2, 5, 9 }, { 'L', 'R', 'R' });
+	tree.addNode({ 3, 6, 10 }, { 'R', 'R', 'L' });
+	tree.print_inorder(); 
+	cout << "Max Val is " << tree.maxVal() << endl;
+	cout << "Min Val is " << tree.minVal() << endl;
+	cout << "Height is " << tree.height() << endl; 
+	cout << "# of leaves is " << tree.leavesCount() << endl; 
+	cout << "# of nodes is " << tree.nodeCounts() << endl;
 
-	LinkedList<int>ll; 
-	ll.insert_end(1); 
-	ll.insert_end(2); 
-	ll.insert_end(3); 
-	ll.insert_end(4); 
-	ll.insert_end(5); 
-	ll.insert_end(6); 
-	ll.insert_end(7);
+	if (tree.find(10))
+		cout << "Yes\n";
+	else
+		cout << "No\n";
+	if (tree.find(100))
+		cout << "Yes\n";
+	else
+		cout << "No\n";
 
-	ll.print();
-	ll.delete_even_elements();
-	ll.print(); 
+	//LinkedList<int>ll; 
+	//ll.insert_end(2); 
+	//ll.insert_end(2); 
+	//ll.insert_end(2); 
+	//ll.insert_end(2); 
+	//ll.insert_end(2); 
+	//ll.insert_end(2); 
+	//ll.insert_end(2);
+	//ll.print();
+	//ll.delete_even_elements();
+	//ll.print(); 
 	//node* root = new node(5);
 	//root->left = new node(2);
 	//root->right = new node(3);
