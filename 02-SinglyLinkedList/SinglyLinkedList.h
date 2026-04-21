@@ -27,7 +27,8 @@ public :
 	void reverse_print() const ; 
 	unsigned int get_lenght()const; 
 	void delete_element(T number);
-
+	void delete_even_elements();
+	
 };
 
 template<typename T>
@@ -205,5 +206,29 @@ inline void LinkedList<T>::delete_element(T number)
 				return; 
 			}
 		}
+	}
+}
+
+template<typename T>
+inline void LinkedList<T>::delete_even_elements()
+{
+
+	Node<T>* current = head; 
+	Node<T>* del_ptr;
+	if (current->data % 2 == 0)
+	{
+		del_ptr = current;
+		current->next = del_ptr->next;
+		delete del_ptr;
+	}
+	while (current->next != nullptr)
+	{
+		if (current->next->data % 2 == 0)
+		{
+			del_ptr = current->next; 
+			current->next = del_ptr->next; 
+			delete del_ptr; 
+		}
+		current = current->next;
 	}
 }

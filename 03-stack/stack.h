@@ -11,11 +11,11 @@ private :
 	void print_helper(Node<T>* node) const ; 
 public : 
 	Stack() : Top(nullptr){}
-	bool isImpty(); 
+	bool isEmpty(); 
 	bool isFind(T number);
 	void push(T number); 
 	void print() const ; 
-	void pop(); 
+	T pop(); 
 	T top(); 
 	int size();
 };
@@ -32,7 +32,7 @@ void inline Stack<T>::print_helper(Node<T>* node) const
 }
 
 template<typename T>
-inline bool Stack<T>::isImpty()
+inline bool Stack<T>::isEmpty()
 {
 	return (Top == nullptr);
 }
@@ -67,12 +67,15 @@ inline void Stack<T>::print() const
 }
 
 template<typename T>
-inline void Stack<T>::pop()
+inline T Stack<T>::pop()
 {
+	//assert(!isEmpty);
 	length--;
 	Node<T>* delPtr = Top;
+	T top = Top->data;
 	Top = Top->next; 
 	delete delPtr; 
+	return top; 
 }
 
 template<typename T>
